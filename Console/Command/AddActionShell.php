@@ -10,6 +10,10 @@ App::uses('AppShell', 'Console/Command');
 
 class AddActionShell extends AppShell {
 
+	/**
+	 * @var array | string
+	 */
+	public $fileClass = array('File', 'Utility');
 
 	public function main()
 	{
@@ -194,9 +198,25 @@ INSERT;
 
 CONTENT;
 
-		App::uses('File', 'Utility');
-		$File = new File($file, true);
+		$File = $this->_getFileClass($file);
 		$File->write($content);
 		return true;
+	}
+
+	/**
+	 * @param $file
+	 *
+	 * @return File
+	 */
+	public function _getFileClass($path, $create = false, $mode = 0755)
+	{
+		App::uses('File', 'Utility');
+		if (is_array($this->fileClass)) {
+			list($class, $location) = $this->fileClass;
+		} else {
+			$class = $this->fileClass;
+		}
+		$File = new $class($path, $create, $mode);
+		return $File;
 	}
 }
