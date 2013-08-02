@@ -37,7 +37,7 @@ class FileDemo extends File
 }
 
 
-class AddActionShellTest {
+class AddActionShellTest CakeTestCase {
 
 	/**
 	 * @var AddActionShell
