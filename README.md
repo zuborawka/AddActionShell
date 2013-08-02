@@ -16,7 +16,7 @@ set the file like below.
 And load the plugin in bootstrap.php:
 
 プラグインとして用いる場合
-下記の要領でファイルを設置して、bootstrap.php でプラグインを有効化して下さい。:
+下記の要領でファイルを設置して、bootstrap.php でプラグインを有効化して下さい。::
 
   // set the file
   app/Plugins/AddActionShell/Console/Command/AddActionShell.php
@@ -27,7 +27,7 @@ And load the plugin in bootstrap.php:
 
 In the case which you want to include it in your application:
 
-あなたのアプリケーション内で使いたい場合:
+あなたのアプリケーション内で使いたい場合::
 
   app/Console/Command/AddActionShell.php
 
