@@ -198,7 +198,7 @@ INSERT;
 
 CONTENT;
 
-		$File = $this->_getFileClass($file);
+		$File = $this->_getFileClass($file, true);
 		$File->write($content);
 		return true;
 	}
