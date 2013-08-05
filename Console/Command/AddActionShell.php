@@ -47,7 +47,7 @@ class AddActionShell extends AppShell {
 		}
 		$path = $this->_getPath($plugin);
 
-		if ($this->_writeAction($path, $controller, $action)) {
+		if ($this->_writeAction($path, $plugin, $controller, $action)) {
 			$this->out($controller . 'Controller::' . $action . '() を追加しました');
 		}
 
@@ -141,12 +141,19 @@ class AddActionShell extends AppShell {
 		return $in;
 	}
 
-	public function _writeAction($path, $controller, $action)
+	public function _writeAction($path, $plugin, $controller, $action)
 	{
 		$file = $path . 'Controller' . DS . $controller . 'Controller.php';
 		if (!file_exists($file)) {
 			return false;
 		}
+
+		$location = $plugin ? $plugin . '.' . 'Controller' : 'Controller';
+		App::uses($controller . 'Controller', $location);
+		if (method_exists($controller . 'Controller', $action)) {
+			return false;
+		}
+
 		$lines = file($file);
 		$count = count($lines);
 		for ($i = $count-1; $i >= 0; $i--) {
