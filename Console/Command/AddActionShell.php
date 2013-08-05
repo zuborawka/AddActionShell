@@ -61,6 +61,7 @@ class AddActionShell extends AppShell {
 		}
 
 		if ($writeAction &&
+			$this->_writeAction($path, $plugin, $controller, $action)) {
 			$this->out($controller . 'Controller::' . $action . '() を追加しました');
 		}
 
