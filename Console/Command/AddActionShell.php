@@ -47,7 +47,21 @@ class AddActionShell extends AppShell {
 		}
 		$path = $this->_getPath($plugin);
 
-		if ($this->_writeAction($path, $plugin, $controller, $action)) {
+		/**
+		 * A flag for appending an action or not.
+		 * @var $writeAction bool
+		 */
+		$writeAction = true;
+
+		if ($controller === 'Pages') {
+			$this->out('PagesController はアクションを追加せずに動作可能です。');
+			$this->out('追加しますか？');
+			$this->out('[Y] 追加する');
+			$this->out('[N] 追加しない');
+			$writeAction = $this->in('', array('Y', 'N'), 'N') === 'Y';
+		}
+
+		if ($writeAction &&
 			$this->out($controller . 'Controller::' . $action . '() を追加しました');
 		}
 
